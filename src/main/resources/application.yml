@@ -1,0 +1,13 @@
+server:
+  port: 9999
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: jenkins
+          uri: https://facebook.com/
+          predicates:
+            - Path=/**
+logging:
+  level:
+    root: DEBUG
