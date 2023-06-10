@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    def app
     
     stages {
         stage('Prepare for build') {
@@ -22,7 +23,14 @@ pipeline {
         stage('Docker image') {
             steps {
                 echo 'Builidng image...'
-                sh 'docker build --tag=gateway:latest .'
+                app = docker.build("orkuztech/gateway")
+            }
+        }
+        
+        stage('Push image to registry') {
+            docker.withRegistry('https://registry.hub.docker.com', 'orkuz-dockerhub') {
+                app.push("${env.BUILD_NUMBER}")
+                app.push("latest")
             }
         }
     }
