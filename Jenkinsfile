@@ -2,18 +2,21 @@ pipeline {
     agent any
     
     stages {
-
-        stage('Build spring app') {
+        stage('Prepare for build') {
             steps {
-                echo 'Building application with maven...'
-                sh 'chmod +x ./mvnw'
-                sh './mvnw clean install -DskipTests'
+                sh 'chmod +x mvnw'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'mvn test'
+                sh './mvnw test -DskipTests'
+            }
+        }
+        stage('Build spring app') {
+            steps {
+                echo 'Building application with maven...'
+                sh './mvnw package -DskipTests'
             }
         }
         stage('Deploy') {
