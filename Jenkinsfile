@@ -35,7 +35,7 @@ pipeline {
         stage('Run container') {
             steps {
                 echo 'Starting docker container...'
-                sh 'docker run orkuz/gateway:latest'
+                sh 'docker run orkuztech/gateway:latest'
             }
         }
     }
