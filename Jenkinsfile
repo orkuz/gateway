@@ -19,10 +19,10 @@ pipeline {
                 sh './mvnw package -DskipTests'
             }
         }
-        stage('Deploy') {
+        stage('Docker image') {
             steps {
-                echo 'Deploying....'
-
+                echo 'Builidng image...'
+                docker build --tag=gateway:latest .
             }
         }
     }
