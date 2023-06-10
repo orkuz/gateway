@@ -33,5 +33,11 @@ pipeline {
                 sh 'docker push orkuztech/gateway:${env.BUILD_NUMBER}'
             }
         }
+        stage('Run container') {
+            steps {
+                echo 'Starting docker container...'
+                sh 'docker run orkuz/gateway:latest'
+            }
+        }
     }
 }
