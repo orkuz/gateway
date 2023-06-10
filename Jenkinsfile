@@ -2,10 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        
+        stage('Clone repository') {
             steps {
-                echo 'Building..'
-                sh 'mvn clean install -DskipTests'
+                echo 'Cloning repository...'
+                git 'https://github.com/orkuz/gateway.git'
+            }
+        }
+
+        stage('Build spring app') {
+            steps {
+                echo 'Building application with maven...'
+                sh './mvnw clean install -DskipTests'
             }
         }
         stage('Test') {
@@ -17,7 +25,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                
+
             }
         }
     }
