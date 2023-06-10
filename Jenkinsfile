@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    def app
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('orkuz-dockerhub')
+	}
     
     stages {
         stage('Prepare for build') {
@@ -20,17 +22,15 @@ pipeline {
                 sh './mvnw package -DskipTests'
             }
         }
-        stage('Docker image') {
+        stage('Build and push docker image') {
             steps {
+                echo 'Logging in to DockerHub...'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 echo 'Builidng image...'
-                app = docker.build("orkuztech/gateway")
-            }
-        }
-        
-        stage('Push image to registry') {
-            docker.withRegistry('https://registry.hub.docker.com', 'orkuz-dockerhub') {
-                app.push("${env.BUILD_NUMBER}")
-                app.push("latest")
+                sh 'docker build -t orkuztech/gateway:latest'
+                echo 'Pushing image to registry...'
+                sh 'docker push orkuztech/gateway:latest'
+                sh 'docker push orkuztech/gateway:${env.BUILD_NUMBER}'
             }
         }
     }
