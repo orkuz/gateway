@@ -30,7 +30,6 @@ pipeline {
                 sh 'docker build -t orkuztech/gateway:latest .'
                 echo 'Pushing image to registry...'
                 sh 'docker push orkuztech/gateway:latest'
-                sh 'docker push orkuztech/gateway:${env.BUILD_NUMBER}'
             }
         }
         stage('Run container') {
