@@ -22,7 +22,7 @@ pipeline {
         stage('Docker image') {
             steps {
                 echo 'Builidng image...'
-                docker build --tag=gateway:latest .
+                sh 'docker build --tag=gateway:latest .'
             }
         }
     }
