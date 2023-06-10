@@ -1,6 +1,10 @@
+options {
+        skipDefaultCheckout(true)
+    }
+    
 pipeline {
     agent any
-
+    
     stages {
         
         stage('Clone repository') {
