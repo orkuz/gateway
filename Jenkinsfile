@@ -9,7 +9,7 @@ pipeline {
             steps {
                 sh 'chmod +x mvnw'
             }
-        }
+        } 
         stage('Test') {
             steps {
                 echo 'Testing..'
