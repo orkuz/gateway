@@ -32,11 +32,5 @@ pipeline {
                 sh 'docker push orkuztech/gateway:latest'
             }
         }
-        stage('Run container') {
-            steps {
-                echo 'Starting docker container...'
-                sh 'docker run orkuztech/gateway:latest'
-            }
-        }
     }
 }
