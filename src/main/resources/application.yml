@@ -10,4 +10,4 @@ spring:
             - Path=/**
 logging:
   level:
-    root: DEBUG
+    root: INFO
