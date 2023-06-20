@@ -4,10 +4,14 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: jenkins
-          uri: https://facebook.com/
+        - id: backend-app-1
+          uri: http://backend-app-1
           predicates:
-            - Path=/**
+            - Path=/test1/**
+        - id: backend-app-2
+          uri: http://backend-app-2
+          predicates:
+            - Path=/test2/**
 logging:
   level:
     root: INFO
