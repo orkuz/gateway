@@ -28,9 +28,9 @@ pipeline {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 echo 'Builidng image and pushing to registry...'
                 script {
-                    echo "Building image orkuztech/gateway:${currentBuild.number}"
-                    def appImage = docker.build("orkuztech/gateway:${currentBuild.number}")
-                    appImage.push()
+                    echo "Building image orkuztech/gateway"
+                    def appImage = docker.build("orkuztech/gateway")
+                    appImage.push("${currentBuild.number}")
                 }
             }
         }
