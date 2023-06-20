@@ -31,6 +31,7 @@ pipeline {
                     echo "Building image orkuztech/gateway"
                     def appImage = docker.build("orkuztech/gateway")
                     appImage.push("${currentBuild.number}")
+                    appImage.push("latest")
                 }
             }
         }
