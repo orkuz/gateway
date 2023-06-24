@@ -12,6 +12,10 @@ spring:
           uri: http://backend-app-2
           predicates:
             - Path=/test2/**
+        - id: backend-app-3
+          uri: http://backend-app-3
+          predicates:
+            - Path=/test3/**
 logging:
   level:
     root: INFO
