@@ -5,17 +5,17 @@ spring:
     gateway:
       routes:
         - id: backend-app-1
-          uri: http://backend-app-1
+          uri: http://backend-app-1/{segment}
           predicates:
-            - Path=/test1/**
+            - Path=/test1/{segment}
         - id: backend-app-2
-          uri: http://backend-app-2
+          uri: http://backend-app-2/{segment}
           predicates:
-            - Path=/test2/**
-        - id: backend-app-3
-          uri: http://backend-app-3
+            - Path=/test2/{segment}
+        - id: hello-flask
+          uri: http://hello-flask/{segment}
           predicates:
-            - Path=/test3/**
+            - Path=/flask/{segment}
 logging:
   level:
     root: INFO
