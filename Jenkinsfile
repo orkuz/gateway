@@ -13,7 +13,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh './mvnw test -DskipTests'
+                sh './mvnw test -U -DskipTests'
             }
         }
         stage('Build spring app') {
