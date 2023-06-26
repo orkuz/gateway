@@ -4,18 +4,18 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: backend-app-1
-          uri: http://backend-app-1/{segment}
-          predicates:
-            - Path=/test1/{segment}
-        - id: backend-app-2
-          uri: http://backend-app-2/{segment}
-          predicates:
-            - Path=/test2/{segment}
         - id: hello-flask
-          uri: http://hello-flask/{segment}
+          uri: http://hello-flask:5000
           predicates:
-            - Path=/flask/{segment}
+            - Path=/flask/**
+          filters:
+            - RewritePath=/flask(?<segment>/?.*), $\{segment}
+        - id: hello-web-api
+          uri: http://hello-web-api
+          predicates:
+            - Path=/webapi/**
+          filters:
+            - RewritePath=/webapi(?<segment>/?.*), $\{segment}
 logging:
   level:
     root: INFO
